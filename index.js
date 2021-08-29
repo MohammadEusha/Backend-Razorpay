@@ -76,19 +76,19 @@ app.post('/verification', (req, res) => {
 app.post('/razorpay', async (req, res) => {
 	// const newInfo = req.body
 	// console.log("Total Cost =>", newInfo.totalCost);
-	// console.log(req.body.ShippingDetails.email);
+	console.log(req.body);
 	const payment_capture = 1
 	const amount = 500
 	const currency = 'INR'
-	// const name = req.body.ShippingDetails.name
-	// console.log("name", name);
+	const name = req.body.ShippingDetailsname
+	console.log("name", name);
 
 	const options = {
 		amount: amount * 100,
 		currency,
 		receipt: shortid.generate(),
 		payment_capture,
-
+		name
 	}
 
 	try {
@@ -99,7 +99,7 @@ app.post('/razorpay', async (req, res) => {
 			currency: response.currency,
 			amount: response.amount,
 			id: response.id,
-
+			name: response.name
 		})
 	} catch (error) {
 		console.log(error)
